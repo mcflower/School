@@ -3,9 +3,20 @@ package com.softdesign.school.utils;
 
 import android.util.Log;
 
+
+/**
+ * Класс логирования. Обертка над классом android.util.Log
+ */
 public class Lg {
 
+    /**
+     * Константа определяющая источник сообщения
+     */
     private static final String PREFIX = "HTC ";
+
+    /**
+     * Константа. Максимальная длина выводимого сообщения в строке
+     */
     public static final int LOGCAT_BUFFER_SIZE = 3000;
 
     private Lg() {
@@ -80,7 +91,7 @@ public class Lg {
     /**
      * Проверяет необходимость вывода лога. Форматирует текст выводимого лога
      * под определенное количестов символов. Выводит лог используя встроенный
-     * класс Log.
+     * класс android.util.Log.
      *
      * @param logCode константа определяющая уровень выводимого лога
      * @param tag     константа содержащая источник инициировавший сообщение
