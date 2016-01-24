@@ -12,7 +12,7 @@ public class Lg {
     /**
      * Константа определяющая источник сообщения
      */
-    private static final String PREFIX = "HTC ";
+    private static final String PREFIX = "SCHOOL ";
 
     /**
      * Константа. Максимальная длина выводимого сообщения в строке
@@ -24,8 +24,8 @@ public class Lg {
 
     private static boolean shouldLog() {
 //        return BuildConfig.IS_LOGCAT_LOGGER_ENABLED;
-//        return true;
-        return false;
+        return true;
+//        return false;
     }
 
     /**
