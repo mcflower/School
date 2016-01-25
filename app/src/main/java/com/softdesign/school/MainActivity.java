@@ -2,19 +2,16 @@ package com.softdesign.school;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.os.PersistableBundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.softdesign.school.utils.Lg;
@@ -22,8 +19,10 @@ import com.softdesign.school.utils.Lg;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String VISIBLE_KEY = "visible";
-    public static final String COLOR_TOOLBAR = "color";
-    private int currentBackgroundToolBar;
+    public static final String STATE_COLOR_TOOLBAR = "toolbar";
+    public static final String STATE_COLOR_STATUSBAR = "statusbar";
+    private int mCurrentBackgroundToolBar;
+    private int mCurrentBackgroundStatusBar;
 
     CheckBox mCheckBox;
     EditText mEditText2;
@@ -130,20 +129,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_blue:
                 //todo какой метод правильный (1) или (2)?
 //                mToolBar.setBackgroundColor(getResources().getColor(R.color.default_blue_color)); (1)
-                mToolBar.setBackgroundResource(R.color.default_blue_color);                       //(2)
-                currentBackgroundToolBar = R.color.default_blue_color;
-                setColorStatusBar(getResources().getColor(R.color.default_dark_blue_color));
+                mCurrentBackgroundToolBar = R.color.default_blue_color;
+                mToolBar.setBackgroundResource(mCurrentBackgroundToolBar);                       //(2)
+
+                mCurrentBackgroundStatusBar = getResources().getColor(R.color.default_dark_blue_color);
+                setColorStatusBar(mCurrentBackgroundStatusBar);
                 break;
             case R.id.btn_green:
-                mToolBar.setBackgroundResource(R.color.default_green_color);
-                currentBackgroundToolBar = R.color.default_green_color;
-                setColorStatusBar(getResources().getColor(R.color.default_dark_green_color));
-//                Toast.makeText(this, "" + mToolBar.getBackground().toString(), Toast.LENGTH_SHORT).show();
+                mCurrentBackgroundToolBar = R.color.default_green_color;
+                mToolBar.setBackgroundResource(mCurrentBackgroundToolBar);
+
+                mCurrentBackgroundStatusBar = getResources().getColor(R.color.default_dark_green_color);
+                setColorStatusBar(mCurrentBackgroundStatusBar);
                 break;
             case R.id.btn_red:
-                mToolBar.setBackgroundResource(R.color.default_red_color);
-                currentBackgroundToolBar = R.color.default_red_color;
-                setColorStatusBar(getResources().getColor(R.color.default_dark_red_color));
+                mCurrentBackgroundToolBar = R.color.default_red_color;
+                mToolBar.setBackgroundResource(mCurrentBackgroundToolBar);
+
+                mCurrentBackgroundStatusBar = getResources().getColor(R.color.default_dark_red_color);
+                setColorStatusBar(mCurrentBackgroundStatusBar);
                 break;
         }
     }
@@ -159,7 +163,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onSaveInstanceState(outState);
         Lg.e(this.getLocalClassName(), "onSaveInstanceState()");
         outState.putBoolean(VISIBLE_KEY, mEditText2.getVisibility() == View.VISIBLE);
-        outState.putInt(COLOR_TOOLBAR, currentBackgroundToolBar);
+        outState.putInt(STATE_COLOR_TOOLBAR, mCurrentBackgroundToolBar);
+        outState.putInt(STATE_COLOR_STATUSBAR, mCurrentBackgroundStatusBar);
     }
 
     @Override
@@ -170,7 +175,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int visibleState = savedInstanceState.getBoolean(VISIBLE_KEY) ? View.VISIBLE : View.INVISIBLE;
         mEditText2.setVisibility(visibleState);
 
-        int backgroundToolBarColor = savedInstanceState.getInt(COLOR_TOOLBAR, R.color.default_blue_color);
+        int backgroundToolBarColor = savedInstanceState.getInt(STATE_COLOR_TOOLBAR, R.color.default_blue_color);
         mToolBar.setBackgroundResource(backgroundToolBarColor);
+
+        int backgroundStatusBarColor = savedInstanceState.getInt(STATE_COLOR_STATUSBAR, R.color.default_dark_blue_color);
+        setColorStatusBar(backgroundStatusBarColor);
     }
 }
