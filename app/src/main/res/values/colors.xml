@@ -5,4 +5,16 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="icon_color">#FFFFFF</color>
+
+
+    <!--todo возможно не правильно назвал переменные-->
+    <!--todo это связанно с тем что начзначение кнопок не известны-->
+    <color name="default_blue_color">#3F51B5</color>
+    <color name="default_red_color">#EE2F45</color>
+    <color name="default_green_color">#25C422</color>
+
+    <color name="default_dark_blue_color">#303F9F</color>
+    <color name="default_dark_red_color">#BC3444</color>
+    <color name="default_dark_green_color">#27A224</color>
+
 </resources>
