@@ -1,4 +1,4 @@
-package com.softdesign.school;
+package com.softdesign.school.ui.activites;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.softdesign.school.R;
 import com.softdesign.school.utils.Lg;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
