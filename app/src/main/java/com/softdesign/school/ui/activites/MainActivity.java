@@ -2,6 +2,9 @@ package com.softdesign.school.ui.activites;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,12 +37,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button mBtnGreen;
     Button mBtnRed;
 
+    private NavigationView mNavigationView;
+    private DrawerLayout mNavigationDrawer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Lg.e(this.getLocalClassName(), "onCreate()");
         setContentView(R.layout.activity_main);
+
+        mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+
 
         setTitle("School lesson 1");
 
@@ -58,6 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnRed.setOnClickListener(this);
 
         setupToolbar();
+        setupDrawer();
+
+    }
+
+    private void setupDrawer(){
+
 
     }
 
@@ -73,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Toast.makeText(this, "Menu click", Toast.LENGTH_SHORT).show();
+            mNavigationDrawer.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
     }
