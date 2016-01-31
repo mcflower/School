@@ -22,6 +22,9 @@ import android.widget.Toast;
 import com.softdesign.school.R;
 import com.softdesign.school.ui.fragments.ContactsFragment;
 import com.softdesign.school.ui.fragments.ProfileFragment;
+import com.softdesign.school.ui.fragments.SettingFragment;
+import com.softdesign.school.ui.fragments.TasksFragment;
+import com.softdesign.school.ui.fragments.TeamFragment;
 import com.softdesign.school.utils.Lg;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -101,18 +104,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        mNavigationView.setCheckedItem(R.id.drawer_contacts);
                         break;
                     case R.id.drawer_setting:
+                        mFragment = new SettingFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_setting).setCheckable(true);
                         break;
                     case R.id.drawer_tasks:
+                        mFragment = new TasksFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_tasks).setCheckable(true);
                         break;
                     case R.id.drawer_team:
+                        mFragment = new TeamFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_team).setCheckable(true);
                         break;
                 }
-                //todo return
+
                 if (mFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, mFragment).addToBackStack(null).commit();
+
                 }
 
                 mNavigationDrawer.closeDrawers();

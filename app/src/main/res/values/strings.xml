@@ -2,8 +2,8 @@
     <string name="app_name">School</string>
     <string name="drawer.profile">Профиль</string>
     <string name="drawer.contacts">Контакты</string>
-    <string name="drawer.team">Задачи</string>
-    <string name="drawer.tasks">Команда</string>
+    <string name="drawer.team">Команда</string>
+    <string name="drawer.tasks">Задачи</string>
     <string name="drawer.setting">Настройки</string>
     <string name="fragment.contacts.desctiption">Здесь будут котакты</string>
     <string name="fragment.profile.desctiption">Здесь будет профайл</string>
