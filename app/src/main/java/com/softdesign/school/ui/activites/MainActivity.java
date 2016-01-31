@@ -3,6 +3,7 @@ package com.softdesign.school.ui.activites;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -15,9 +16,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.softdesign.school.R;
+import com.softdesign.school.ui.fragments.ContactsFragment;
+import com.softdesign.school.ui.fragments.ProfileFragment;
 import com.softdesign.school.utils.Lg;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -40,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView mNavigationView;
     private DrawerLayout mNavigationDrawer;
 
+    private Fragment mFragment;
+    private FrameLayout mFrameContainer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,27 +60,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setTitle("School lesson 1");
 
-        mCheckBox = (CheckBox) findViewById(R.id.checkBox);
-        mCheckBox.setOnClickListener(this);
+//        mCheckBox = (CheckBox) findViewById(R.id.checkBox);
+//        mCheckBox.setOnClickListener(this);
 
-        mEditText2 = (EditText) findViewById(R.id.editText2);
+//        mEditText2 = (EditText) findViewById(R.id.editText2);
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
 
-        mBtnBlue = (Button) findViewById(R.id.btn_blue);
-        mBtnGreen = (Button) findViewById(R.id.btn_green);
-        mBtnRed = (Button) findViewById(R.id.btn_red);
+//        mBtnBlue = (Button) findViewById(R.id.btn_blue);
+//        mBtnGreen = (Button) findViewById(R.id.btn_green);
+//        mBtnRed = (Button) findViewById(R.id.btn_red);
 
-        mBtnBlue.setOnClickListener(this);
-        mBtnGreen.setOnClickListener(this);
-        mBtnRed.setOnClickListener(this);
+//        mBtnBlue.setOnClickListener(this);
+//        mBtnGreen.setOnClickListener(this);
+//        mBtnRed.setOnClickListener(this);
 
         setupToolbar();
         setupDrawer();
 
+        if (savedInstanceState != null) {
+
+        } else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, new ProfileFragment()).commit();
+        }
+
     }
 
     private void setupDrawer(){
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.drawer_profile:
+                        mFragment = new ProfileFragment();
+                        mNavigationView.getMenu().findItem(R.id.drawer_profile).setCheckable(true);
+//                        mNavigationView.setCheckedItem(R.id.drawer_profile);
+                        break;
+                    case R.id.drawer_contacts:
+                        mFragment = new ContactsFragment();
+                        mNavigationView.getMenu().findItem(R.id.drawer_contacts).setCheckable(true);
+//                        mNavigationView.setCheckedItem(R.id.drawer_contacts);
+                        break;
+                    case R.id.drawer_setting:
+                        mNavigationView.getMenu().findItem(R.id.drawer_setting).setCheckable(true);
+                        break;
+                    case R.id.drawer_tasks:
+                        mNavigationView.getMenu().findItem(R.id.drawer_tasks).setCheckable(true);
+                        break;
+                    case R.id.drawer_team:
+                        mNavigationView.getMenu().findItem(R.id.drawer_team).setCheckable(true);
+                        break;
+                }
+                //todo return
+                if (mFragment != null) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, mFragment).addToBackStack(null).commit();
+                }
 
+                mNavigationDrawer.closeDrawers();
+                return false;
+            }
+        });
 
     }
 
