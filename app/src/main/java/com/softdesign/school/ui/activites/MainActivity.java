@@ -1,6 +1,8 @@
 package com.softdesign.school.ui.activites;
 
 import android.annotation.TargetApi;
+import android.app.FragmentManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -27,22 +29,22 @@ import com.softdesign.school.ui.fragments.TasksFragment;
 import com.softdesign.school.ui.fragments.TeamFragment;
 import com.softdesign.school.utils.Lg;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String VISIBLE_KEY = "visible";
-    public static final String STATE_COLOR_TOOLBAR = "toolbar";
-    public static final String STATE_COLOR_STATUSBAR = "statusbar";
-    private int mCurrentBackgroundToolBar;
-    private int mCurrentBackgroundStatusBar;
+//    public static final String VISIBLE_KEY = "visible";
+//    public static final String STATE_COLOR_TOOLBAR = "toolbar";
+//    public static final String STATE_COLOR_STATUSBAR = "statusbar";
+//    private int mCurrentBackgroundToolBar;
+//    private int mCurrentBackgroundStatusBar;
 
-    CheckBox mCheckBox;
-    EditText mEditText2;
+    //    CheckBox mCheckBox;
+//    EditText mEditText2;
     Toolbar mToolBar;
 
 
-    Button mBtnBlue;
-    Button mBtnGreen;
-    Button mBtnRed;
+//    Button mBtnBlue;
+//    Button mBtnGreen;
+//    Button mBtnRed;
 
     private NavigationView mNavigationView;
     private DrawerLayout mNavigationDrawer;
@@ -62,6 +64,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         setTitle("School lesson 1");
+
+        /**
+         * Если устройство поддерживает делаем прозрачным status bar
+         */
+        if (Build.VERSION.SDK_INT >= 21) {
+            // Set the status bar to dark-semi-transparentish
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
 
 //        mCheckBox = (CheckBox) findViewById(R.id.checkBox);
 //        mCheckBox.setOnClickListener(this);
@@ -88,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void setupDrawer(){
+    private void setupDrawer() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -96,29 +107,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.drawer_profile:
                         mFragment = new ProfileFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_profile).setCheckable(true);
-//                        mNavigationView.setCheckedItem(R.id.drawer_profile);
+                        mNavigationView.setCheckedItem(R.id.drawer_profile);
                         break;
                     case R.id.drawer_contacts:
                         mFragment = new ContactsFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_contacts).setCheckable(true);
-//                        mNavigationView.setCheckedItem(R.id.drawer_contacts);
+                        mNavigationView.setCheckedItem(R.id.drawer_contacts);
                         break;
                     case R.id.drawer_setting:
                         mFragment = new SettingFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_setting).setCheckable(true);
+                        mNavigationView.setCheckedItem(R.id.drawer_setting);
                         break;
                     case R.id.drawer_tasks:
                         mFragment = new TasksFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_tasks).setCheckable(true);
+                        mNavigationView.setCheckedItem(R.id.drawer_tasks);
                         break;
                     case R.id.drawer_team:
                         mFragment = new TeamFragment();
                         mNavigationView.getMenu().findItem(R.id.drawer_team).setCheckable(true);
+                        mNavigationView.setCheckedItem(R.id.drawer_team);
                         break;
                 }
 
                 if (mFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, mFragment).addToBackStack(null).commit();
+
+                } else {
 
                 }
 
@@ -127,6 +143,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+
+    /**
+     * Метод обработки нажатия клавиши back
+     */
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            finish();
+            System.exit(0);
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
     private void setupToolbar() {
@@ -185,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
+        /*int id = v.getId();
         switch (id) {
             case R.id.checkBox:
                 Toast.makeText(this, "Click!", Toast.LENGTH_SHORT).show();
@@ -218,11 +248,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mCurrentBackgroundStatusBar = getResources().getColor(R.color.default_dark_red_color);
                 setColorStatusBar(mCurrentBackgroundStatusBar);
                 break;
-        }
+        }*/
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    protected void setColorStatusBar(int color){
+    protected void setColorStatusBar(int color) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getWindow().setStatusBarColor(color);
     }
@@ -231,9 +261,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Lg.e(this.getLocalClassName(), "onSaveInstanceState()");
-        outState.putBoolean(VISIBLE_KEY, mEditText2.getVisibility() == View.VISIBLE);
-        outState.putInt(STATE_COLOR_TOOLBAR, mCurrentBackgroundToolBar);
-        outState.putInt(STATE_COLOR_STATUSBAR, mCurrentBackgroundStatusBar);
+//        outState.putBoolean(VISIBLE_KEY, mEditText2.getVisibility() == View.VISIBLE);
+//        outState.putInt(STATE_COLOR_TOOLBAR, mCurrentBackgroundToolBar);
+//        outState.putInt(STATE_COLOR_STATUSBAR, mCurrentBackgroundStatusBar);
     }
 
     @Override
@@ -241,13 +271,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestoreInstanceState(savedInstanceState);
         Lg.e(this.getLocalClassName(), "onRestoreInstanceState()");
 
-        int visibleState = savedInstanceState.getBoolean(VISIBLE_KEY) ? View.VISIBLE : View.INVISIBLE;
+        /*int visibleState = savedInstanceState.getBoolean(VISIBLE_KEY) ? View.VISIBLE : View.INVISIBLE;
         mEditText2.setVisibility(visibleState);
 
         int backgroundToolBarColor = savedInstanceState.getInt(STATE_COLOR_TOOLBAR, R.color.default_blue_color);
         mToolBar.setBackgroundResource(backgroundToolBarColor);
 
         int backgroundStatusBarColor = savedInstanceState.getInt(STATE_COLOR_STATUSBAR, R.color.default_dark_blue_color);
-        setColorStatusBar(backgroundStatusBarColor);
+        setColorStatusBar(backgroundStatusBarColor);*/
     }
 }

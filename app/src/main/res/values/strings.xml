@@ -10,4 +10,6 @@
     <string name="fragment.team.description">Здесь будет команда</string>
     <string name="fragment.tasks.description">Здесь будут задачи</string>
     <string name="fragment.setting.description">Здесь будут настройки</string>
+    <string name="navigation.login">Илья Зеленский</string>
+    <string name="navigation.email">mcflower@me.com</string>
 </resources>
