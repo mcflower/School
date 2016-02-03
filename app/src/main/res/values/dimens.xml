@@ -16,4 +16,6 @@
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="navigation_menu_margin_left">16dp</dimen>
     <dimen name="navigation_account_menu">56dp</dimen>
+    <dimen name="navigation_avatar">56dp</dimen>
+    <dimen name="statusbar_height">24dp</dimen>
 </resources>
