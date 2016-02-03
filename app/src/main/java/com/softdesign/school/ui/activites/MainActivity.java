@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-
         setTitle("School lesson 1");
 
         /**
