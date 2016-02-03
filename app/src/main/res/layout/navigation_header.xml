@@ -4,20 +4,6 @@
     android:layout_height="160dp"
     android:background="@drawable/bgrnd">
 
-
-
-
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Hello World"
-        android:id="@+id/textView2"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:fitsSystemWindows="true"
-        android:textColor="#ffffff" />-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +18,8 @@
             android:id="@+id/imageView" />
         
         <TextView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="@dimen/navigation_raiting"
+            android:layout_height="@dimen/navigation_raiting"
             android:background="@drawable/rating_range_green"
             android:text="5"
             android:layout_alignTop="@+id/imageView"
@@ -63,7 +49,7 @@
             android:textColor="@color/text_white"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="@dimen/seporator_height"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -71,7 +57,7 @@
             android:text="@string/navigation.email"
             android:textColor="@color/text_white"
             android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="@dimen/seporator_height"/>
 
     </LinearLayout>
 </RelativeLayout>

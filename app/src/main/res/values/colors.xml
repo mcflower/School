@@ -6,10 +6,6 @@
 
     <color name="icon_color">#FFFFFF</color>
 
-
-
-    <!--todo возможно не правильно назвал переменные-->
-    <!--todo это связанно с тем что начзначение кнопок не известны-->
     <color name="default_blue_color">#3F51B5</color>
     <color name="default_red_color">#F44336</color>
     <color name="default_green_color">#4CAF50</color>
