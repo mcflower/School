@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">School</string>
+    <string name="drawer.profile">Профиль</string>
+    <string name="drawer.contacts">Контакты</string>
+    <string name="drawer.team">Команда</string>
+    <string name="drawer.tasks">Задачи</string>
+    <string name="drawer.setting">Настройки</string>
+    <string name="fragment.contacts.desctiption">Здесь будут котакты</string>
+    <string name="fragment.profile.desctiption">Здесь будет профайл</string>
+    <string name="fragment.team.description">Здесь будет команда</string>
+    <string name="fragment.tasks.description">Здесь будут задачи</string>
+    <string name="fragment.setting.description">Здесь будут настройки</string>
+    <string name="navigation.login">Илья Зеленский</string>
+    <string name="navigation.email">mcflower@me.com</string>
 </resources>
