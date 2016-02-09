@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">School</string>
     <string name="drawer.profile">Профиль</string>
+    <string name="drawer.profile.name">Илья Зеленский</string>
     <string name="drawer.contacts">Контакты</string>
     <string name="drawer.team">Команда</string>
     <string name="drawer.tasks">Задачи</string>
@@ -12,4 +13,10 @@
     <string name="fragment.setting.description">Здесь будут настройки</string>
     <string name="navigation.login">Илья Зеленский</string>
     <string name="navigation.email">mcflower@me.com</string>
+    <string name="fragment.profile.phone.number">+7(927)770-37-04</string>
+    <string name="fragment.profile.phone.label.mobile">Мобильный</string>
+
+    <!--Font Family-->
+    <string name="ff_regular">sans-serif</string>
+    <string name="ff_medium">sans-serif-medium</string>
 </resources>
