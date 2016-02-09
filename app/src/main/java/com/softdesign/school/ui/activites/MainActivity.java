@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private CollapsingToolbarLayout mCollapsingToolbar;
     private View mHeaderLayout;
 
-    //todo тут может быть другой класс у LayoutParams
     AppBarLayout.LayoutParams params = null;
 
 
@@ -73,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Если устройство поддерживает делаем прозрачным status bar
          */
-        /*if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }*/
+        }
 
 
         if (savedInstanceState != null) {
@@ -87,27 +86,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Сворачиваем и разворачиваем ToolBar
+     * @param collapse - true (свернуть)
+     */
     public void lockAppBar(boolean collapse) {
 
         if (collapse) {
 
-
+            mAppBar.setExpanded(false);
             AppBarLayout.OnOffsetChangedListener mListener = new AppBarLayout.OnOffsetChangedListener() {
                 @Override
                 public void onOffsetChanged(AppBarLayout mAppBar, int verticalOffset) {
                     if (mCollapsingToolbar.getHeight() + verticalOffset <= ViewCompat.getMinimumHeight(mCollapsingToolbar) + getStatusBarHeight()) {
-                        mAppBar.removeOnOffsetChangedListener(this);
                         params.setScrollFlags(0);
                         mCollapsingToolbar.setLayoutParams(params);
+                        mAppBar.removeOnOffsetChangedListener(this);
                     }
                 }
             };
             mAppBar.addOnOffsetChangedListener(mListener);
-            mAppBar.setExpanded(false);
+
         } else {
+            mAppBar.setExpanded(true);
             params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
             mCollapsingToolbar.setLayoutParams(params);
-            mAppBar.setExpanded(true);
+
         }
     }
 
@@ -200,13 +204,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    /*@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    protected void setColorStatusBar(int color) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(color);
-    }*/
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
