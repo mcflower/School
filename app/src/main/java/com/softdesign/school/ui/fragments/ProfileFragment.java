@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.softdesign.school.R;
+import com.softdesign.school.ui.activites.MainActivity;
 
 /**
  * Created by Ilya_Zelenskiy on 31.01.16.
@@ -19,7 +20,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View convertView = inflater.inflate(R.layout.fragment_profile, null, false);
-        getActivity().setTitle(getResources().getString(R.string.drawer_profile));
+        getActivity().setTitle(getResources().getString(R.string.drawer_profile_name));
+        ((MainActivity) getActivity()).lockAppBar(false);
         return convertView;
     }
 }

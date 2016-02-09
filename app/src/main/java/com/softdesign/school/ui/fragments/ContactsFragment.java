@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.softdesign.school.R;
+import com.softdesign.school.ui.activites.MainActivity;
 
 /**
  * Created by Ilya_Zelenskiy on 31.01.16.
@@ -19,6 +20,7 @@ public class ContactsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View convertView = inflater.inflate(R.layout.fragment_contacts, null, false);
         getActivity().setTitle(getResources().getString(R.string.drawer_contacts));
+        ((MainActivity) getActivity()).lockAppBar(true);
         return convertView;
     }
 }

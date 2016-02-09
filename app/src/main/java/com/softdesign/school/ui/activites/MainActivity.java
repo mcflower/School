@@ -4,9 +4,12 @@ import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
     private Fragment mFragment;
     private FrameLayout mFrameContainer;
 
+    public AppBarLayout mAppBar;
+    private CollapsingToolbarLayout mCollapsingToolbar;
+    private View mHeaderLayout;
+
+    //todo тут может быть другой класс у LayoutParams
+    AppBarLayout.LayoutParams params = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +59,25 @@ public class MainActivity extends AppCompatActivity {
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
 
+        mAppBar = (AppBarLayout) findViewById(R.id.appbar_layout);
+        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+
         setTitle("School lesson 1");
 
-        /**
-         * Если устройство поддерживает делаем прозрачным status bar
-         */
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
 
         setupToolbar();
         setupDrawer();
+
+        /**
+         * Если устройство поддерживает делаем прозрачным status bar
+         */
+        /*if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }*/
+
 
         if (savedInstanceState != null) {
 
@@ -70,6 +85,43 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, new ProfileFragment()).commit();
         }
 
+    }
+
+    public void lockAppBar(boolean collapse) {
+
+        if (collapse) {
+
+
+            AppBarLayout.OnOffsetChangedListener mListener = new AppBarLayout.OnOffsetChangedListener() {
+                @Override
+                public void onOffsetChanged(AppBarLayout mAppBar, int verticalOffset) {
+                    if (mCollapsingToolbar.getHeight() + verticalOffset <= ViewCompat.getMinimumHeight(mCollapsingToolbar) + getStatusBarHeight()) {
+                        mAppBar.removeOnOffsetChangedListener(this);
+                        params.setScrollFlags(0);
+                        mCollapsingToolbar.setLayoutParams(params);
+                    }
+                }
+            };
+            mAppBar.addOnOffsetChangedListener(mListener);
+            mAppBar.setExpanded(false);
+        } else {
+            params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
+            mCollapsingToolbar.setLayoutParams(params);
+            mAppBar.setExpanded(true);
+        }
+    }
+
+    /**
+     *
+     * @return Возвращает высоту статус бар
+     */
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourseId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourseId > 0) {
+            result = getResources().getDimensionPixelSize(resourseId);
+        }
+        return result;
     }
 
     private void setupDrawer() {
@@ -107,8 +159,6 @@ public class MainActivity extends AppCompatActivity {
                 if (mFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, mFragment).addToBackStack(null).commit();
 
-                } else {
-
                 }
 
                 mNavigationDrawer.closeDrawers();
@@ -135,6 +185,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupToolbar() {
         setSupportActionBar(mToolBar);
         ActionBar actionBar = getSupportActionBar();
+        params = (AppBarLayout.LayoutParams) mCollapsingToolbar.getLayoutParams();
+
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -150,11 +202,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    /*@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setColorStatusBar(int color) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getWindow().setStatusBarColor(color);
-    }
+    }*/
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
