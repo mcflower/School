@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,12 +26,15 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.softdesign.school.R;
+import com.softdesign.school.data.storage.models.User;
 import com.softdesign.school.ui.fragments.ContactsFragment;
 import com.softdesign.school.ui.fragments.ProfileFragment;
 import com.softdesign.school.ui.fragments.SettingFragment;
 import com.softdesign.school.ui.fragments.TasksFragment;
 import com.softdesign.school.ui.fragments.TeamFragment;
 import com.softdesign.school.utils.Lg;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private View mHeaderLayout;
 
     AppBarLayout.LayoutParams params = null;
+
+
 
 
     @Override
@@ -90,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
      * Сворачиваем и разворачиваем ToolBar
      * @param collapse - true (свернуть)
      */
-    public void lockAppBar(boolean collapse) {
+    public void lockAppBar(boolean collapse, String title) {
+
+        mCollapsingToolbar.setTitle(title);
 
         if (collapse) {
 
