@@ -28,7 +28,7 @@ public class ProfileFragment extends Fragment {
 //        AppCompatActivity activity = (AppCompatActivity) getActivity();
 //        activity.getSupportActionBar().setTitle(R.string.drawer_profile_name);
 
-        ((MainActivity) getActivity()).lockAppBar(false, getResources().getString(R.string.drawer_profile_name));
+        ((MainActivity) getActivity()).lockAppBar(false);
         return convertView;
     }
 

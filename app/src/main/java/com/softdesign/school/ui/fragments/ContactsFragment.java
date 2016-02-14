@@ -1,5 +1,6 @@
 package com.softdesign.school.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -27,29 +28,42 @@ public class ContactsFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<User> mUsers = new ArrayList<User>();
+    View mainView;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        generateUsers();
+        mAdapter = new RecycleUserAdapter(mUsers);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View convertView = inflater.inflate(R.layout.fragment_contacts, null, false);
+//        View convertView = inflater.inflate(R.layout.fragment_contacts, null, false);
 //        AppCompatActivity activity = (AppCompatActivity) getActivity();
 //        activity.getSupportActionBar().setTitle(R.string.drawer_contacts);
 //        ((MainActivity) getActivity()).lockAppBar(true, getResources().getString(R.string.drawer_contacts));
+        if (mainView == null) {
+            // Если представления нет, создаем его*//*
+            mainView = inflater.inflate(R.layout.fragment_contacts, container, false);}
+        getActivity().setTitle(getResources().getString(R.string.drawer_contacts));
 
+//        generateUsers();
 
-        generateUsers();
+        mRecyclerView = (RecyclerView) mainView.findViewById(R.id.recycle_view);
+        mRecyclerView.setHasFixedSize(true);
 
-        mRecyclerView = (RecyclerView) convertView.findViewById(R.id.recycle_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new RecycleUserAdapter(mUsers);
+//        mAdapter = new RecycleUserAdapter(mUsers);
         mRecyclerView.setAdapter(mAdapter);
 
-        ((MainActivity) getActivity()).lockAppBar(true, getResources().getString(R.string.drawer_contacts));
+        ((MainActivity) getActivity()).lockAppBar(true);
 
 //        ((MainActivity) getActivity()).lockAppBar(true);
-        return convertView;
+        return mainView;
     }
 
     @Override

@@ -9,13 +9,14 @@ import com.softdesign.school.R;
 import com.softdesign.school.data.storage.models.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class RecycleUserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
-    ArrayList<User> users;
+    List<User> users;
 
-    public RecycleUserAdapter(ArrayList<User> users) {
+    public RecycleUserAdapter(List<User> users) {
         this.users = users;
     }
 

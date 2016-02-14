@@ -1,8 +1,7 @@
 package com.softdesign.school.ui.activites;
 
 import android.annotation.TargetApi;
-import android.app.FragmentManager;
-import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -32,6 +31,7 @@ import com.softdesign.school.ui.fragments.ProfileFragment;
 import com.softdesign.school.ui.fragments.SettingFragment;
 import com.softdesign.school.ui.fragments.TasksFragment;
 import com.softdesign.school.ui.fragments.TeamFragment;
+import com.softdesign.school.utils.ConstantManager;
 import com.softdesign.school.utils.Lg;
 
 import java.util.ArrayList;
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private View mHeaderLayout;
 
     AppBarLayout.LayoutParams params = null;
+    private FragmentManager mFragmentManager;
+    private String mFragmentTag = null;
 
 
 
@@ -69,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("School lesson 1");
 
-
+        // инициализируем встроенные методы Activity
+        mFragmentManager = getSupportFragmentManager();
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
 
         setupToolbar();
@@ -87,16 +90,130 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
 
         } else {
+            mFragment = fragmentInstanceByTag(ConstantManager.FRAGMENT_TAG_PROFILE);
             getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, new ProfileFragment()).commit();
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            mNavigationDrawer.openDrawer(GravityCompat.START);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment findingFragment = (Fragment) getSupportFragmentManager().findFragmentById(R.id.main_frame_container);
+
+        if (findingFragment != null && findingFragment instanceof ProfileFragment) {
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+        super.onBackPressed();
+    }
+
+    /**
+     * Инициализирует ToolBar
+     */
+    public void setupToolbar() {
+        setSupportActionBar(mToolBar);
+        ActionBar actionBar = getSupportActionBar();
+        params = (AppBarLayout.LayoutParams) mCollapsingToolbar.getLayoutParams();
+
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    /**
+     * Инициализирует NavigationDrawer
+     */
+    private void setupDrawer() {
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.drawer_profile:
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_PROFILE;
+                        mNavigationView.getMenu().findItem(R.id.drawer_profile).setChecked(true);
+                        break;
+                    case R.id.drawer_contacts:
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_CONTACTS;
+                        mNavigationView.getMenu().findItem(R.id.drawer_contacts).setChecked(true);
+                        break;
+                    case R.id.drawer_setting:
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_CONTACTS;
+                        mNavigationView.getMenu().findItem(R.id.drawer_setting).setChecked(true);
+                        break;
+                    case R.id.drawer_team:
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_CONTACTS;
+                        mNavigationView.getMenu().findItem(R.id.drawer_team).setChecked(true);
+                        break;
+                    case R.id.drawer_tasks:
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_CONTACTS;
+                        mNavigationView.getMenu().findItem(R.id.drawer_tasks).setChecked(true);
+                        break;
+                }
+
+                mFragment = fragmentInstanceByTag(mFragmentTag);
+                mFragmentManager.beginTransaction().replace(R.id.main_frame_container, mFragment, mFragmentTag)
+                        .addToBackStack(mFragmentTag).commit();
+
+                mNavigationDrawer.closeDrawers();
+                return false;
+            }
+        });
+    }
+
+    /**
+     * Сворачивает ToolBar
+     *
+     * @param collapse true - свернуть / false -  развернуть
+     */
+    public void lockAppBar(boolean collapse) {
+        if (collapse) {
+            AppBarLayout.OnOffsetChangedListener mListener = new AppBarLayout.OnOffsetChangedListener() {
+                @Override
+                public void onOffsetChanged(AppBarLayout mAppBar, int verticalOffset) {
+                    if (mCollapsingToolbar.getHeight() + verticalOffset <= ViewCompat.getMinimumHeight(mCollapsingToolbar) + getStatusBarHeight()) {
+                        mAppBar.removeOnOffsetChangedListener(this);
+                        LockToolBar();
+                    }
+                }
+            };
+            mAppBar.addOnOffsetChangedListener(mListener);
+            mAppBar.setExpanded(false);
+        } else {
+            UnLockToolBar();
+            mAppBar.setExpanded(true);
+        }
+    }
+
+    /**
+     * Снимает блокировку с ToolBar выставляя scrollFlag
+     */
+    private void LockToolBar() {
+        params.setScrollFlags(0);
+        mCollapsingToolbar.setLayoutParams(params);
+    }
+
+    /**
+     * Блокирует ToolBar выставляя scrollFlag
+     */
+    private void UnLockToolBar() {
+        params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
+        mCollapsingToolbar.setLayoutParams(params);
     }
 
     /**
      * Сворачиваем и разворачиваем ToolBar
      * @param collapse - true (свернуть)
      */
-    public void lockAppBar(boolean collapse, String title) {
+    /*public void lockAppBar(boolean collapse, String title) {
 
         mCollapsingToolbar.setTitle(title);
 
@@ -121,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
             mCollapsingToolbar.setLayoutParams(params);
 
         }
-    }
+    }*/
 
     /**
      *
@@ -136,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    private void setupDrawer() {
+   /* private void setupDrawer() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -179,12 +296,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+*/
 
     /**
      * Метод обработки нажатия клавиши back
      */
-    @Override
+   /* @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             finish();
@@ -192,9 +309,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             getSupportFragmentManager().popBackStack();
         }
-    }
+    }*/
 
-    private void setupToolbar() {
+    /*private void setupToolbar() {
         setSupportActionBar(mToolBar);
         ActionBar actionBar = getSupportActionBar();
         params = (AppBarLayout.LayoutParams) mCollapsingToolbar.getLayoutParams();
@@ -211,15 +328,51 @@ public class MainActivity extends AppCompatActivity {
             mNavigationDrawer.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
+    /**
+     * Создаем фрагмент по его тегу
+     *
+     * @param mFragmentTag - тег фрагмента
+     * @return фрагмент
+     */
+    private Fragment fragmentInstanceByTag(String mFragmentTag) {
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+        Fragment newFragment;
+        switch (mFragmentTag) {
+            case ConstantManager.FRAGMENT_TAG_PROFILE:
+                newFragment = mFragmentManager.findFragmentByTag(mFragmentTag);
+                if (newFragment == null) {
+                    newFragment = new ProfileFragment();
+                }
+                break;
+            case ConstantManager.FRAGMENT_TAG_CONTACTS:
+                newFragment = mFragmentManager.findFragmentByTag(mFragmentTag);
+                if (newFragment == null) {
+                    newFragment = new ContactsFragment();
+                }
+                break;
+            case ConstantManager.FRAGMENT_TAG_SETTINGS:
+                newFragment = mFragmentManager.findFragmentByTag(mFragmentTag);
+                if (newFragment == null) {
+                    newFragment = new SettingFragment();
+                }
+                break;
+            case ConstantManager.FRAGMENT_TAG_TASKS:
+                newFragment = mFragmentManager.findFragmentByTag(mFragmentTag);
+                if (newFragment == null) {
+                    newFragment = new TasksFragment();
+                }
+                break;
+            case ConstantManager.FRAGMENT_TAG_TEAM:
+                newFragment = mFragmentManager.findFragmentByTag(mFragmentTag);
+                if (newFragment == null) {
+                    newFragment = new TeamFragment();
+                }
+                break;
+            default:
+                newFragment = mFragmentManager.findFragmentById(R.id.main_frame_container);
+                break;
+        }
+        return newFragment;
     }
 }
