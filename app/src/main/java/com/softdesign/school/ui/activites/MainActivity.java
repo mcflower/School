@@ -210,36 +210,6 @@ public class MainActivity extends AppCompatActivity {
         mCollapsingToolbar.setLayoutParams(params);
     }
 
-    /**
-     * Сворачиваем и разворачиваем ToolBar
-     * @param collapse - true (свернуть)
-     */
-    /*public void lockAppBar(boolean collapse, String title) {
-
-        mCollapsingToolbar.setTitle(title);
-
-        if (collapse) {
-
-            mAppBar.setExpanded(false);
-            AppBarLayout.OnOffsetChangedListener mListener = new AppBarLayout.OnOffsetChangedListener() {
-                @Override
-                public void onOffsetChanged(AppBarLayout mAppBar, int verticalOffset) {
-                    if (mCollapsingToolbar.getHeight() + verticalOffset <= ViewCompat.getMinimumHeight(mCollapsingToolbar) + getStatusBarHeight()) {
-                        params.setScrollFlags(0);
-                        mCollapsingToolbar.setLayoutParams(params);
-                        mAppBar.removeOnOffsetChangedListener(this);
-                    }
-                }
-            };
-            mAppBar.addOnOffsetChangedListener(mListener);
-
-        } else {
-            mAppBar.setExpanded(true);
-            params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
-            mCollapsingToolbar.setLayoutParams(params);
-
-        }
-    }*/
 
     /**
      *
@@ -254,82 +224,7 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-   /* private void setupDrawer() {
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.drawer_profile:
-                        mFragment = new ProfileFragment();
-                        mNavigationView.getMenu().findItem(R.id.drawer_profile).setCheckable(true);
-                        mNavigationView.setCheckedItem(R.id.drawer_profile);
-                        break;
-                    case R.id.drawer_contacts:
-                        mFragment = new ContactsFragment();
-                        mNavigationView.getMenu().findItem(R.id.drawer_contacts).setCheckable(true);
-                        mNavigationView.setCheckedItem(R.id.drawer_contacts);
-                        break;
-                    case R.id.drawer_setting:
-                        mFragment = new SettingFragment();
-                        mNavigationView.getMenu().findItem(R.id.drawer_setting).setCheckable(true);
-                        mNavigationView.setCheckedItem(R.id.drawer_setting);
-                        break;
-                    case R.id.drawer_tasks:
-                        mFragment = new TasksFragment();
-                        mNavigationView.getMenu().findItem(R.id.drawer_tasks).setCheckable(true);
-                        mNavigationView.setCheckedItem(R.id.drawer_tasks);
-                        break;
-                    case R.id.drawer_team:
-                        mFragment = new TeamFragment();
-                        mNavigationView.getMenu().findItem(R.id.drawer_team).setCheckable(true);
-                        mNavigationView.setCheckedItem(R.id.drawer_team);
-                        break;
-                }
 
-                if (mFragment != null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_container, mFragment).addToBackStack(null).commit();
-
-                }
-
-                mNavigationDrawer.closeDrawers();
-                return false;
-            }
-        });
-
-    }
-*/
-
-    /**
-     * Метод обработки нажатия клавиши back
-     */
-   /* @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            finish();
-            System.exit(0);
-        } else {
-            getSupportFragmentManager().popBackStack();
-        }
-    }*/
-
-    /*private void setupToolbar() {
-        setSupportActionBar(mToolBar);
-        ActionBar actionBar = getSupportActionBar();
-        params = (AppBarLayout.LayoutParams) mCollapsingToolbar.getLayoutParams();
-
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            mNavigationDrawer.openDrawer(GravityCompat.START);
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
     /**
      * Создаем фрагмент по его тегу
      *

@@ -24,4 +24,7 @@
     <string name="fragment.profile.phone.label.vk">Профиль в VK</string>
     <string name="fragment.profile.about">Обо мне</string>
     <string name="fragment.profile.about.text">Коротко обо мне</string>
+    <string name="fragment.profile.vk.text">https://vk.com/id190469789</string>
+    <string name="fragment.profile.email.text">greenfild@gmail.com</string>
+    <string name="fragment.profile.git.text">https://github.com/mcflower/School-Softdesign</string>
 </resources>
