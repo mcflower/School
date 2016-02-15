@@ -19,4 +19,9 @@
     <!--Font Family-->
     <string name="ff_regular">sans-serif</string>
     <string name="ff_medium">sans-serif-medium</string>
+    <string name="fragment.profile.phone.label.email">E-mail</string>
+    <string name="fragment.profile.phone.label.repositoriy">Репозиторий</string>
+    <string name="fragment.profile.phone.label.vk">Профиль в VK</string>
+    <string name="fragment.profile.about">Обо мне</string>
+    <string name="fragment.profile.about.text">Коротко обо мне</string>
 </resources>

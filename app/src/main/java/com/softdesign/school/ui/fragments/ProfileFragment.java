@@ -28,7 +28,7 @@ public class ProfileFragment extends Fragment {
 //        AppCompatActivity activity = (AppCompatActivity) getActivity();
 //        activity.getSupportActionBar().setTitle(R.string.drawer_profile_name);
 
-        ((MainActivity) getActivity()).lockAppBar(false);
+        ((MainActivity) getActivity()).lockAppBar(false, getResources().getString(R.string.drawer_profile_name));
         return convertView;
     }
 
@@ -40,6 +40,6 @@ public class ProfileFragment extends Fragment {
         params.setAnchorId(R.id.appbar_layout);
         params.anchorGravity = Gravity.BOTTOM | Gravity.RIGHT;
         fab.setLayoutParams(params);
-        fab.setImageResource(R.drawable.ic_call_white_24dp);
+        fab.setImageResource(R.drawable.ic_mode_edit_24dp);
     }
 }

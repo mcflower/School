@@ -146,15 +146,15 @@ public class MainActivity extends AppCompatActivity {
                         mNavigationView.getMenu().findItem(R.id.drawer_contacts).setChecked(true);
                         break;
                     case R.id.drawer_setting:
-                        mFragmentTag = ConstantManager.FRAGMENT_TAG_CONTACTS;
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_SETTINGS;
                         mNavigationView.getMenu().findItem(R.id.drawer_setting).setChecked(true);
                         break;
                     case R.id.drawer_team:
-                        mFragmentTag = ConstantManager.FRAGMENT_TAG_CONTACTS;
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_TEAM;
                         mNavigationView.getMenu().findItem(R.id.drawer_team).setChecked(true);
                         break;
                     case R.id.drawer_tasks:
-                        mFragmentTag = ConstantManager.FRAGMENT_TAG_CONTACTS;
+                        mFragmentTag = ConstantManager.FRAGMENT_TAG_TASKS;
                         mNavigationView.getMenu().findItem(R.id.drawer_tasks).setChecked(true);
                         break;
                 }
@@ -174,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param collapse true - свернуть / false -  развернуть
      */
-    public void lockAppBar(boolean collapse) {
+    public void lockAppBar(boolean collapse, String title) {
+        setTitle(title);
         if (collapse) {
             AppBarLayout.OnOffsetChangedListener mListener = new AppBarLayout.OnOffsetChangedListener() {
                 @Override

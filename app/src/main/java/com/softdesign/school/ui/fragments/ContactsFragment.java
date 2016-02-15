@@ -46,8 +46,9 @@ public class ContactsFragment extends Fragment {
 //        ((MainActivity) getActivity()).lockAppBar(true, getResources().getString(R.string.drawer_contacts));
         if (mainView == null) {
             // Если представления нет, создаем его*//*
-            mainView = inflater.inflate(R.layout.fragment_contacts, container, false);}
-        getActivity().setTitle(getResources().getString(R.string.drawer_contacts));
+            mainView = inflater.inflate(R.layout.fragment_contacts, container, false);
+        }
+//        getActivity().setTitle(getResources().getString(R.string.drawer_contacts));
 
 //        generateUsers();
 
@@ -60,7 +61,7 @@ public class ContactsFragment extends Fragment {
 //        mAdapter = new RecycleUserAdapter(mUsers);
         mRecyclerView.setAdapter(mAdapter);
 
-        ((MainActivity) getActivity()).lockAppBar(true);
+        ((MainActivity) getActivity()).lockAppBar(true, getResources().getString(R.string.drawer_contacts));
 
 //        ((MainActivity) getActivity()).lockAppBar(true);
         return mainView;
@@ -68,7 +69,7 @@ public class ContactsFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        getActivity().setTitle(getResources().getString(R.string.drawer_contacts));
+//        getActivity().setTitle(getResources().getString(R.string.drawer_contacts));
 
         super.onActivityCreated(savedInstanceState);
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
