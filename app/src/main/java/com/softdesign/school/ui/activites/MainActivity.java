@@ -38,21 +38,30 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Fragment mFragment;
+    private View mHeaderLayout;
+    private String mFragmentTag = null;
+    private FragmentManager mFragmentManager;
+
+    public AppBarLayout.LayoutParams params = null;
+
+
+
     Toolbar mToolBar;
 
     private NavigationView mNavigationView;
     private DrawerLayout mNavigationDrawer;
 
-    private Fragment mFragment;
+
     private FrameLayout mFrameContainer;
 
     public AppBarLayout mAppBar;
     private CollapsingToolbarLayout mCollapsingToolbar;
-    private View mHeaderLayout;
 
-    AppBarLayout.LayoutParams params = null;
-    private FragmentManager mFragmentManager;
-    private String mFragmentTag = null;
+
+
+
+
 
 
 
