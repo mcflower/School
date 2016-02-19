@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     public AppBarLayout.LayoutParams params = null;
 
-
-
     Toolbar mToolBar;
 
     private NavigationView mNavigationView;
@@ -57,13 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
     public AppBarLayout mAppBar;
     private CollapsingToolbarLayout mCollapsingToolbar;
-
-
-
-
-
-
-
 
 
     @Override
