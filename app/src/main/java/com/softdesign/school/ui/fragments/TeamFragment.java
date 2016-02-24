@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.softdesign.school.R;
+import com.softdesign.school.ui.activites.MainActivity;
 
 /**
  * Created by Ilya_Zelenskiy on 31.01.16.
@@ -20,6 +21,7 @@ public class TeamFragment  extends Fragment{
 
         View convertView = inflater.inflate(R.layout.fragment_team, null, false);
         getActivity().setTitle(getResources().getString(R.string.drawer_team));
+//        ((MainActivity) getActivity()).lockAppBar(true, getResources().getString(R.string.drawer_team));
         return convertView;
     }
 

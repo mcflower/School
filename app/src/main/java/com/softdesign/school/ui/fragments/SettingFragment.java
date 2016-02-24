@@ -8,19 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.softdesign.school.R;
+import com.softdesign.school.ui.activites.MainActivity;
 
 /**
  * Created by Ilya_Zelenskiy on 31.01.16.
  */
 public class SettingFragment extends Fragment {
 
-        @Nullable
+    View mainView;
+
+    @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-            View convertView = inflater.inflate(R.layout.fragment_setting, null, false);
+            if (mainView == null) {
+                // Если представления нет, создаем его*//*
+                mainView = inflater.inflate(R.layout.fragment_setting, container, false);}
             getActivity().setTitle(getResources().getString(R.string.drawer_setting));
-            return convertView;
+            /*View convertView = inflater.inflate(R.layout.fragment_setting, null, false);
+            getActivity().setTitle(getResources().getString(R.string.drawer_setting));*/
+//            ((MainActivity) getActivity()).lockAppBar(true, getResources().getString(R.string.drawer_setting));
+            return mainView;
         }
 
 }

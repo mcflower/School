@@ -1,14 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="28dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment.profile.desctiption"
-        android:layout_gravity="center"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <RelativeLayout
+        style="@style/list_item"
+        android:layout_marginTop="@dimen/spacing_small">
 
-</RelativeLayout>
+        <android.support.v7.widget.AppCompatImageView
+            style="@style/icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:src="@drawable/ic_call_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font.medium"
+                android:id="@+id/txt_phone_value"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"
+                android:text="@string/fragment.profile.phone.number"/>
+
+            <TextView
+                style="@style/font.regular"
+                android:id="@+id/txt_phone_label"
+                android:text="@string/fragment.profile.phone.label.mobile"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_phone_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/et_phone_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment.profile.phone.label.mobile"
+                    android:enabled="true"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/list_item"
+        android:layout_marginTop="@dimen/spacing_small">
+
+        <android.support.v7.widget.AppCompatImageView
+            style="@style/icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:src="@drawable/ic_email_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font.medium"
+                android:id="@+id/txt_email_value"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"
+                android:text="@string/fragment.profile.email.text"/>
+
+            <TextView
+                style="@style/font.regular"
+                android:id="@+id/txt_email_label"
+                android:text="@string/fragment.profile.phone.label.email"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_email_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_email_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment.profile.phone.label.email" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/list_item"
+        android:layout_marginTop="@dimen/spacing_small">
+
+        <android.support.v7.widget.AppCompatImageView
+            style="@style/icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:src="@drawable/vk_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font.medium"
+                android:id="@+id/txt_vk_value"
+                android:text="@string/fragment.profile.vk.text"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <TextView
+                style="@style/font.regular"
+                android:id="@+id/txt_vk_label"
+                android:text="@string/fragment.profile.phone.label.vk"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_vk_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_vk_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment.profile.phone.label.vk" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/list_item"
+        android:layout_marginTop="@dimen/spacing_small">
+
+        <android.support.v7.widget.AppCompatImageView
+            style="@style/icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:src="@drawable/github" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font.medium"
+                android:id="@+id/txt_git_value"
+                android:text="@string/fragment.profile.git.text"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <TextView
+                style="@style/font.regular"
+                android:id="@+id/txt_git_label"
+                android:text="@string/fragment.profile.phone.label.repositoriy"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_git_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_git_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment.profile.phone.label.repositoriy" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/list_item"
+        android:layout_marginTop="@dimen/spacing_small">
+
+        <android.support.v7.widget.AppCompatImageView
+            style="@style/icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:src="@drawable/ic_account_circle_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font.medium"
+                android:id="@+id/txt_bio_value"
+                android:text="@string/fragment.profile.about"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <TextView
+                style="@style/font.regular"
+                android:id="@+id/txt_bio_label"
+                android:text="@string/fragment.profile.about.text"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat,UnusedAttribute"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/et_bio_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_bio_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment.profile.about.text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
